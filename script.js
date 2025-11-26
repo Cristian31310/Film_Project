@@ -1,5 +1,3 @@
-console.log(peliculas);
-
 const container = document.createElement("div");
 container.style.display = "grid";
 container.style.gridTemplateColumns = "1fr 1fr 1fr";
@@ -48,7 +46,9 @@ function bodyStyle() {
   document.body.style.backgroundAttachment = "fixed";
 }
 
-function search() {}
+function search() {
+    displayFilms(masPeliculas);
+}
 
 function displayFilms(dataFilms) {
   for (let i = 0; i < dataFilms.Search.length; i++) {

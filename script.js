@@ -1,11 +1,12 @@
 const container = document.createElement("div");
 
-// const response = await fetch("http://www.omdbapi.com/?i=tt3896198&apikey=496cdeca", {});
-// const response = fetch("http://www.omdbapi.com/?apikey=496cdeca&s=Star").then;
-
+let pageNumber = 1;
 var userSearch = "pink+floyd";
-var apiURL = "http://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch;
+var apiURL = "http://www.omdbapi.com/?apikey=496cdeca&s=";
+var defaultApiURL = "http://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch;
 const buttonSearch = document.getElementById("searchButtom");
+var inputMovie = document.getElementById("movieInput");
+var petecionEnCurso;
 
 container.style.display = "grid";
 container.style.gridTemplateColumns = "1fr 1fr 1fr";
@@ -67,37 +68,43 @@ function displayFilms(dataFilms) {
   }
 }
 
-function movieSearch() {
-  fetch(apiURL)
-    .then((response) => response.json())
-    // .then((data) => console.log(data));
-    .then((data) => displayFilms(data));
+function movieSearch(url) {
+  if (!petecionEnCurso) {
+    petecionEnCurso = true;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => displayFilms(data));
+    petecionEnCurso = false;
+  }
 }
 
-// movieSearch();
+movieSearch(defaultApiURL);
 
-const form  = document.getElementById('form');
-
-movieSearch();
-form.addEventListener('submit', (event) => {
-   var algo = document.getElementById("movieInput").value
-
+buttonSearch.addEventListener("click", (event) => {
+  userSearch = inputMovie.value;
+  let page = "&page=";
+  movieSearch(apiURL + userSearch + page +pageNumber);
+  pageNumber ++;
+  console.log(page + pageNumber);
+  
 });
 
+// Metodo para el scroll infinito, no funcional
 window.onscroll = (e) => {
-  let cercaFinal = window.innerHeight + window.scrollY >= document.body.offsetHeight - 300
+  let cercaFinal =
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
 
-  if(cercaFinal){
+  if (cercaFinal) {
     console.log("saltaImagen");
-    
+    //Lanzar petición aquí
   }
   console.log("scroll");
-}
-
-// buttonSearch.addEventListener("click", search);
-
-// console.log(document.getElementById("movieInput").value);
+};
 
 // displayFilms(peliculas);
 bodyStyle();
 document.body.appendChild(container);
+
+// Solucionar el error cuando no aperece una imagen
+
+// img.onerror = () => "ruta imagen por defecto"

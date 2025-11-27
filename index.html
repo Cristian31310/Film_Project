@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pelis Chulas</title>
 </head>
-<body>
 
-    <button onclick = "search()"> Click Aquí Para Mostrar Más Peliculas</button>
-    
+<body>
+    <!-- <form action="./script.js" method="post" id="form"> -->
+    <form  method="post" id="form">
+        <label for="movieInput">Buscar Peliculas</label>
+        <input type="text" id = "movieInput" name = "movieInput">
+        <input type = "submit" value="Search" id="searchButtom"> 
+    </form>
+
 </body>
+
 <script src="./peliculas.js"></script>
 <script src="./masPeliculas.js"></script>
 <script src="./script.js"></script>
+
 </html>

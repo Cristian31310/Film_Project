@@ -1,6 +1,7 @@
 const container = document.createElement("div");
-
+container.setAttribute("id", "superDiv");
 let pageNumber = 1;
+let page = "&page=";
 var userSearch = "pink+floyd";
 var apiURL = "http://www.omdbapi.com/?apikey=496cdeca&s=";
 var defaultApiURL = "http://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch;
@@ -75,18 +76,26 @@ function movieSearch(url) {
       .then((response) => response.json())
       .then((data) => displayFilms(data));
     petecionEnCurso = false;
+    pageNumber++;
   }
 }
 
 movieSearch(defaultApiURL);
 
+function reload() {
+    let superDiv = document.getElementById("superDiv");
+    while (superDiv.firstChild) {
+      superDiv.removeChild(superDiv.firstChild);
+    }
+}
 buttonSearch.addEventListener("click", (event) => {
+  if(userSearch != inputMovie.value){
+    pageNumber = 1;
+    reload();
+  }
   userSearch = inputMovie.value;
-  let page = "&page=";
-  movieSearch(apiURL + userSearch + page +pageNumber);
-  pageNumber ++;
+  movieSearch(apiURL + userSearch + page + pageNumber);
   console.log(page + pageNumber);
-  
 });
 
 // Metodo para el scroll infinito, no funcional
@@ -97,6 +106,7 @@ window.onscroll = (e) => {
   if (cercaFinal) {
     console.log("saltaImagen");
     //Lanzar petición aquí
+    movieSearch(apiURL + userSearch + page + pageNumber);
   }
   console.log("scroll");
 };
@@ -108,3 +118,5 @@ document.body.appendChild(container);
 // Solucionar el error cuando no aperece una imagen
 
 // img.onerror = () => "ruta imagen por defecto"
+
+// Poner todo en un window onload

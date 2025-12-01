@@ -1,64 +1,42 @@
-console.log(peliculas);
 
-const container = document.createElement("div");
-container.style.display = "grid";
-container.style.gridTemplateColumns = "1fr 1fr 1fr";
-container.style.color = "white";
+const buttonSearchMovie = document.getElementById("buttonMovie");
+const buttonSearchSerie = document.getElementById("buttonSerie");
 
-var div;
-var caratula;
-var title;
-var year;
-var type;
+var inputMovie = document.getElementById("movieInput");
+var inputSerie = document.getElementById("serieInput");
+var petecionEnCurso;
 
-function createElements() {
-  div = document.createElement("div");
-  caratula = document.createElement("img");
-  title = document.createElement("p");
-  year = document.createElement("p");
-  type = document.createElement("p");
+var container = document.createElement("div");
+container.setAttribute("id", "superDiv");
+
+window.onload = () => {
+  searchButtom(buttonSearchMovie, inputMovie, "movie");
+  searchButtom(buttonSearchSerie, inputSerie, "series");
 }
 
-function insertJsonContent(i) {
-  title.textContent = peliculas.Search[i].Title;
-  year.textContent = peliculas.Search[i].Year;
-  type.textContent = peliculas.Search[i].Type;
-  caratula.setAttribute("src", peliculas.Search[i].Poster);
+function searchButtom(button, input, type) {
+  controller.movieSearch(container);
+
+  button.addEventListener("click", (event) => {
+    console.log("INPUT =>" + input.value)
+    if (controller.userSearch != input.value) {
+      controller.setPageNumber(1);
+      controller.setType(type)
+      view.reload();
+    }
+
+    controller.setUserSearch(input.value);
+    controller.movieSearch(container);
+  });
 }
 
-function elementStyles() {
-  caratula.style.height = "500px";
-  caratula.style.width = "340px";
-  caratula.style.margin = "25px";
-  div.style.textAlign = "center";
-}
+window.onscroll = (e) => {
+  let cercaFinal =
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
 
-function apendJsonElement() {
-  div.appendChild(caratula);
-  div.appendChild(title);
-  div.appendChild(year);
-  div.appendChild(type);
-  container.appendChild(div);
-}
-
-function bodyStyle() {
-  document.body.style.backgroundImage = "url(./img/spaceBG.jpg)";
-  document.body.style.backgroundRepeat = "no-repeat";
-  document.body.style.backgroundSize = "100%";
-  document.body.style.backgroundAttachment = "fixed";
-}
-
-function search() {}
-
-function displayFilms(dataFilms) {
-  for (let i = 0; i < dataFilms.Search.length; i++) {
-    createElements();
-    insertJsonContent(i);
-    elementStyles();
-    apendJsonElement();
+  if (cercaFinal) {
+    controller.movieSearch(container);
   }
-}
+};
 
-displayFilms(peliculas);
-bodyStyle();
 document.body.appendChild(container);

@@ -1,0 +1,22 @@
+body {
+  background-image: url(./img/spaceBG.jpg);
+  background-repeat: repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  color: white;
+}
+
+#superDiv {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+img {
+  height: 500px;
+  width: 340px;
+  margin: 25px;
+}
+
+div {
+  text-align: center;
+}

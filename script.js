@@ -12,6 +12,8 @@ container.setAttribute("id", "superDiv");
 window.onload = () => {
   searchButtom(buttonSearchMovie, inputMovie, "movie");
   searchButtom(buttonSearchSerie, inputSerie, "series");
+  document.body.appendChild(container);
+  imageEvent();
 }
 
 function searchButtom(button, input, type) {
@@ -30,6 +32,11 @@ function searchButtom(button, input, type) {
   });
 }
 
+function imageEvent() {
+  var img = document.querySelector("p");
+  console.log(img);
+}
+
 window.onscroll = (e) => {
   let cercaFinal =
     window.innerHeight + window.scrollY >= document.body.offsetHeight - 300;
@@ -39,4 +46,3 @@ window.onscroll = (e) => {
   }
 };
 
-document.body.appendChild(container);

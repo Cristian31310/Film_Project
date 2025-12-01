@@ -5,9 +5,9 @@ var petecionEnCurso;
 
 var page = "&page=";
 var userSearch = "Godzilla";
-var apiURL = "http://www.omdbapi.com/?apikey=496cdeca&s=";
+var apiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=";
 var type = "movie"
-var defaultApiURL = "http://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch + page + pageNumber + "&type=" + type;
+var defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch + page + pageNumber + "&type=" + type;
 
 class controller {
 
@@ -24,7 +24,7 @@ class controller {
   }
 
   static movieSearch(container) {
-    defaultApiURL = "http://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch + page + pageNumber + "&type=" + type;
+    defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch + page + pageNumber + "&type=" + type;
     if (!petecionEnCurso) {
       petecionEnCurso = true;
       fetch(defaultApiURL)

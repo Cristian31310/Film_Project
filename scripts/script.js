@@ -13,28 +13,6 @@ window.onload = () => {
   searchButtom(buttonSearchMovie, inputMovie, "movie");
   searchButtom(buttonSearchSerie, inputSerie, "series");
   document.body.appendChild(container);
-  imageEvent();
-}
-
-function searchButtom(button, input, type) {
-  controller.movieSearch(container);
-
-  button.addEventListener("click", (event) => {
-    console.log("INPUT =>" + input.value)
-    if (controller.userSearch != input.value) {
-      controller.setPageNumber(1);
-      controller.setType(type)
-      view.reload();
-    }
-
-    controller.setUserSearch(input.value);
-    controller.movieSearch(container);
-  });
-}
-
-function imageEvent() {
-  var img = document.querySelector("p");
-  console.log(img);
 }
 
 window.onscroll = (e) => {

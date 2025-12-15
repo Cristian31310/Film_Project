@@ -8,7 +8,6 @@ var userSearch = "Godzilla";
 var apiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=";
 var type = "movie"
 var defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch + page + pageNumber + "&type=" + type;
-
 class controller {
 
   static setType(search) {
@@ -32,6 +31,18 @@ class controller {
         .then((data) => view.displayFilms(data, container));
       petecionEnCurso = false;
       pageNumber++;
+    }
+  }
+
+
+  static imdbData(id) {
+    defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&i=" + id;
+    if (!petecionEnCurso) {
+      petecionEnCurso = true;
+      fetch(defaultApiURL)
+        .then((response) => response.json())
+        .then((data) => view.itemDetail(id, data));
+      petecionEnCurso = false;
     }
   }
 }

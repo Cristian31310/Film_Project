@@ -72,48 +72,45 @@ class view {
   }
 
   static itemDetail(id, data) {
+    let numDataMovie = ["Title", "Year", "Director", "Actors", "Plot", "Ratings"];
     let detailView = document.createElement("div");
     let movieData = document.createElement("div");
-    let img = document.createElement("img");
 
-    let title = document.createElement("h2");
-    let year = document.createElement("p");
-    let director = document.createElement("p");
-    let actors = document.createElement("p");
-    let sinopsis = document.createElement("p");
+    this.createElement("img", detailView, null, "src", data.Poster);
 
-    let closeDetailButtom = document.createElement("button");
-    closeDetailButtom.textContent = "X";
-    closeDetailButtom.setAttribute("id", "closeDetail");
+    for (let i = 0; i < numDataMovie.length; i++) {
+      if (i == 0) {
+        this.createElement("h1", movieData, data[numDataMovie[i]]);
+      } else if (i == numDataMovie.length - 1) {
+        for (let j = 0; j < data.Ratings.length; j++) {
+          this.createElement("p", movieData, data.Ratings[j].Source + ": " + data.Ratings[j].Value);
+        }
+      } else {
+        this.createElement("p", movieData, numDataMovie[i] + ": " + data[numDataMovie[i]], movieData);
+      }
+    }
+
+    let closeDetailButtom = this.createElement("button", detailView, "X", "id", "closeDetail")
+    // let closeDetailButtom = document.createElement("button");
+    // closeDetailButtom.textContent = "X";
+    // closeDetailButtom.setAttribute("id", "closeDetail");
     closeDetail(closeDetailButtom);
 
-    movieData.appendChild(title);
-    movieData.appendChild(year);
-    movieData.appendChild(director);
-    movieData.appendChild(actors);
-    movieData.appendChild(sinopsis);
-
-    title.textContent = "Title: " + data.Title;
-    year.textContent = "Year: " + data.Year;
-    director.textContent = "Director: " + data.Director;
-    actors.textContent = "Actors: " + data.Actors;
-    sinopsis.textContent = "Plot: " + data.Plot;
-    // Esto es del div
     detailView.setAttribute("id", "itemDetail");
-    console.log(data);
-
-    for (let i = 0; i < data.Ratings.length; i++) {
-      let rating = document.createElement("p");
-      movieData.appendChild(rating);
-      rating.textContent = data.Ratings[i].Source + ": " + data.Ratings[i].Value;
-      console.log(data.Ratings[i].Source, data.Ratings[i].Value);
-    }
-    // Esto es de la imagen
-    img.setAttribute("src", data.Poster);
-
-    detailView.appendChild(img);
     detailView.appendChild(movieData);
-    detailView.appendChild(closeDetailButtom);
+    // detailView.appendChild(closeDetailButtom);
     document.body.appendChild(detailView);
+  }
+
+  static createElement(tagName, father, content = null, attribute = null, attributeValue = null) {
+    let element = document.createElement(tagName);
+    father.appendChild(element);
+    if (content != null) {
+      element.textContent = content;
+    } else if (attribute != null) {
+      element.setAttribute(attribute, attributeValue)
+    }
+
+    return element;
   }
 } 

@@ -62,11 +62,12 @@ class view {
   }
 
   static displayFilms(dataFilms, container) {
-
-    for (let i = 0; i < dataFilms.Search.length; i++) {
-      this.createElements();
-      this.insertJsonContent(dataFilms, i);
-      this.apendJsonElement(container);
+    if (dataFilms.Response !== "False") {
+      for (let i = 0; i < dataFilms.Search.length; i++) {
+        this.createElements();
+        this.insertJsonContent(dataFilms, i);
+        this.apendJsonElement(container);
+      }
     }
   }
 
@@ -101,6 +102,12 @@ class view {
     detailView.setAttribute("id", "itemDetail");
     console.log(data);
 
+    for (let i = 0; i < data.Ratings.length; i++) {
+      let rating = document.createElement("p");
+      movieData.appendChild(rating);
+      rating.textContent = data.Ratings[i].Source + ": " + data.Ratings[i].Value;
+      console.log(data.Ratings[i].Source, data.Ratings[i].Value);
+    }
     // Esto es de la imagen
     img.setAttribute("src", data.Poster);
 

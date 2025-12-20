@@ -10,6 +10,8 @@ var container = document.createElement("div");
 container.setAttribute("id", "superDiv");
 
 window.onload = () => {
+  // searchButtom(buttonSearchMovie, inputMovie, "movie");
+  // searchButtom(buttonSearchSerie, inputSerie, "series");
   searchButtom(buttonSearchMovie, inputMovie, "movie");
   searchButtom(buttonSearchSerie, inputSerie, "series");
   document.body.appendChild(container);

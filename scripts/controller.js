@@ -8,6 +8,7 @@ var userSearch = "Godzilla";
 var apiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=";
 var type = "movie"
 var defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch + page + pageNumber + "&type=" + type;
+
 class controller {
 
   static setType(search) {

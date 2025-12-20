@@ -11,8 +11,23 @@ function closeDetail(element) {
     view.reload("itemDetail");
   });
 }
+
 function searchButtom(button, input, type) {
   controller.movieSearch(container);
+  input.addEventListener("keyup", (event) => {
+    console.log(event.key)
+    console.log("hola ^w^ ", input.value.length);
+    if (input.value.length >= 3 || event.key == "Enter") {
+      console.log("INPUT =>" + input.value)
+      if (controller.userSearch != input.value) {
+        controller.setPageNumber(1);
+        controller.setType(type)
+        view.reload("superDiv");
+      }
+      controller.setUserSearch(input.value);
+      controller.movieSearch(container);
+    }
+  });
 
   button.addEventListener("click", (event) => {
     console.log("INPUT =>" + input.value)

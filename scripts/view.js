@@ -81,25 +81,31 @@ class view {
     for (let i = 0; i < numDataMovie.length; i++) {
       if (i == 0) {
         this.createElement("h1", movieData, data[numDataMovie[i]]);
+
       } else if (i == numDataMovie.length - 1) {
         for (let j = 0; j < data.Ratings.length; j++) {
           this.createElement("p", movieData, data.Ratings[j].Source + ": " + data.Ratings[j].Value);
         }
+
       } else {
         this.createElement("p", movieData, numDataMovie[i] + ": " + data[numDataMovie[i]], movieData);
       }
     }
 
     let closeDetailButtom = this.createElement("button", detailView, "X", "id", "closeDetail")
-    // let closeDetailButtom = document.createElement("button");
-    // closeDetailButtom.textContent = "X";
-    // closeDetailButtom.setAttribute("id", "closeDetail");
     closeDetail(closeDetailButtom);
 
     detailView.setAttribute("id", "itemDetail");
     detailView.appendChild(movieData);
-    // detailView.appendChild(closeDetailButtom);
     document.body.appendChild(detailView);
+  }
+
+  static report(data, mayIReload) {
+    let reportView = document.createElement("div");
+    reportView.setAttribute("id", "reportView");
+    this.createElement("p", reportView, "hola");
+    this.displayFilms(data, reportView);
+    document.body.appendChild(reportView);
   }
 
   static createElement(tagName, father, content = null, attribute = null, attributeValue = null) {

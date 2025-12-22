@@ -15,8 +15,6 @@ function closeDetail(element) {
 function searchButtom(button, input, type) {
   controller.movieSearch(container);
   input.addEventListener("keyup", (event) => {
-    console.log(event.key)
-    console.log("hola ^w^ ", input.value.length);
     if (input.value.length >= 3 || event.key == "Enter") {
       console.log("INPUT =>" + input.value)
       if (controller.userSearch != input.value) {
@@ -25,7 +23,7 @@ function searchButtom(button, input, type) {
         view.reload("superDiv");
       }
       controller.setUserSearch(input.value);
-      controller.movieSearch(container);
+      // controller.movieSearch(container);
     }
   });
 
@@ -39,4 +37,22 @@ function searchButtom(button, input, type) {
     controller.setUserSearch(input.value);
     controller.movieSearch(container);
   });
+}
+
+function reportButtonEvent(button) {
+  let isclick = true;
+  button.addEventListener("click", (event) => {
+    if (isclick) {
+      container.style.display = "none";
+      // container.style.position = "static"
+      controller.reportController(isclick);
+      isclick = false;
+    } else {
+      container.style.display = "grid";
+      for (let i = 0; i < pageNumber + 2; i++) {
+        view.reload("reportView");
+      }
+      isclick = true;
+    }
+  })
 }

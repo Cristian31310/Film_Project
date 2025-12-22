@@ -4,16 +4,16 @@ const buttonSearchSerie = document.getElementById("buttonSerie");
 
 var inputMovie = document.getElementById("movieInput");
 var inputSerie = document.getElementById("serieInput");
+var reportButton = document.getElementById("buttonReport");
 var petecionEnCurso;
 
 var container = document.createElement("div");
 container.setAttribute("id", "superDiv");
 
 window.onload = () => {
-  // searchButtom(buttonSearchMovie, inputMovie, "movie");
-  // searchButtom(buttonSearchSerie, inputSerie, "series");
   searchButtom(buttonSearchMovie, inputMovie, "movie");
   searchButtom(buttonSearchSerie, inputSerie, "series");
+  reportButtonEvent(reportButton);
   document.body.appendChild(container);
 }
 

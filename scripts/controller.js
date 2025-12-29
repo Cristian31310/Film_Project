@@ -31,7 +31,6 @@ class controller {
         .then((response) => response.json())
         .then((data) => {
           view.displayFilms(data, container);
-          // console.log(data)
         });
       petecionEnCurso = false;
       pageNumber++;
@@ -44,42 +43,43 @@ class controller {
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     const movies = data.Search;
-    let movieRatings = new Map();
-    let movieVotes = new Map();
-    let movieOffices = new Map();
+    let movieVotes = new Array();
+    let movieRatings = new Array();
+    let movieOffices = new Array();
 
     for (let i = 0; i < 10; i++) {
       let votes = await this.movieVotes(movies[i].imdbID);
       let office = await this.movieOffice(movies[i].imdbID);
-      movieVotes.set(movies[i].imdbID, parseInt(votes.split(",").join("")));
-      movieOffices.set(movies[i].imdbID, parseInt(office.slice(1).split(",").join("")));
-      movieRatings.set(movies[i].imdbID, await this.movieRating(movies[i].imdbID));
+      let movie = {
+        img: movies[i].Poster,
+        title: movies[i].Title
+      };
+      let votesArray = [movie, parseInt(votes.split(",").join(""))];
+      let officeArray = [movie, parseInt(office.slice(1).split(",").join(""))];
+      let ratingArray = [movie, await this.movieRating(movies[i].imdbID)];
+      movieVotes.push(votesArray);
+      movieOffices.push(officeArray);
+      movieRatings.push(ratingArray);
+      // movieVotes.set(movie.img, parseInt(votes.split(",").join("")));
+      // movieOffices.set(movies[i].imdbID, parseInt(office.slice(1).split(",").join("")));
+      // movieRatings.set(movies[i].imdbID, await this.movieRating(movies[i].imdbID));
     }
+    console.log(movieVotes);
+    console.log(movieOffices);
+    console.log(movieRatings);
 
-    console.log("Votos Ordenados: ", await this.orderAndTruncateMap(movieVotes, 4000));
-    console.log("Ratings Ordenados: ", await this.orderAndTruncateMap(movieRatings, 7));
-    console.log("BoxOffice Ordenados: ", await this.orderAndTruncateMap(movieOffices, 20000000));
-    return movies;
+    this.orderAndTruncateArray(movieVotes, 4000);
+    this.orderAndTruncateArray(movieOffices, 10000000);
+    this.orderAndTruncateArray(movieRatings, 7);
+
+    view.report(await this.orderAndTruncateArray(movieVotes, 4000),
+      await this.orderAndTruncateArray(movieOffices, 10000000),
+      await this.orderAndTruncateArray(movieRatings, 7));
   }
-
-  static async orderAndTruncateMap(map, truncValue) {
-    let orderMap = new Map([...map.entries()].sort((a, b) => b[1] - a[1]));
-    let truncMap = new Map();
-    // Este try catch existe para parar de iterar el for each.
-    // Solo quiero todas las peliculas con calificaciones mayores a 7. Iterar más alla de eso me parece un código poco optimizado
-    try {
-      // movieRatings.clear();
-      orderMap.forEach((movie, key) => {
-        if (movie >= truncValue) {
-          truncMap.set(key, movie);
-        } else if (movie < truncValue) {
-          throw new Error("The rest of the movies are bad");
-        }
-      });
-    } catch (error) {
-      console.log();
-    }
-    return truncMap;
+  static async orderAndTruncateArray(array, truncValue) {
+    let order = array.filter((item) => item[1] >= truncValue);
+    console.log("order: ", order);
+    return order;
   }
   static async movieRating(id) {
     defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&i=" + id;
@@ -102,24 +102,24 @@ class controller {
     return data.BoxOffice;
   }
 
-  static reportController() {
-
-    console.log(this.hola());
-
-    for (let i = 0; i < 5; i++) {
-      defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch + page + i + "&type=" + type;
-      if (!petecionEnCurso) {
-        petecionEnCurso = true;
-        fetch(defaultApiURL)
-          .then((response) => response.json())
-          .then((data) => {
-            // view.report(data, true);
-            // console.log(data)
-          });
-        petecionEnCurso = false;
-      }
-    }
-  }
+  // static reportController() {
+  //
+  //   // console.log(this.hola());
+  //
+  //   for (let i = 0; i < 5; i++) {
+  //     defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch + page + i + "&type=" + type;
+  //     if (!petecionEnCurso) {
+  //       petecionEnCurso = true;
+  //       fetch(defaultApiURL)
+  //         .then((response) => response.json())
+  //         .then((data) => {
+  //           // view.report(data, true);
+  //           // console.log(data)
+  //         });
+  //       petecionEnCurso = false;
+  //     }
+  //   }
+  // }
 
   static imdbData(id) {
     defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&i=" + id;

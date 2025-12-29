@@ -100,12 +100,38 @@ class view {
     document.body.appendChild(detailView);
   }
 
-  static report(data, mayIReload) {
+  static report(votes, offices, rankings) {
     let reportView = document.createElement("div");
     reportView.setAttribute("id", "reportView");
-    this.createElement("p", reportView, "hola");
-    this.displayFilms(data, reportView);
+    this.createElement("h1", reportView, "Más Votadas");
+    reportView.appendChild(this.reportVotes(votes));
+    this.createElement("h1", reportView, "Más Taquilleras");
+    reportView.appendChild(this.reportVotes(offices));
+    this.createElement("h1", reportView, "Mejor Valoradas");
+    reportView.appendChild(this.reportVotes(rankings));
     document.body.appendChild(reportView);
+    // console.log(votesDiv.getBoundingClientRect())
+    console.log(document.getElementById("carrouselElement").getBoundingClientRect())
+  }
+
+  static reportVotes(votes) {
+    console.log("reportvotes: ", votes)
+    let votesDiv = document.createElement("div");
+    votesDiv.setAttribute("id", "movieCarrousel")
+    for (let i = 0; i < votes.length; i++) {
+      let div = document.createElement("div", "carrouselElement");
+      div.setAttribute("id", "carrouselElement")
+      this.createElement("img", div, null, "src", votes[i][0].img);
+      this.createElement("p", div, votes[i][0].title);
+      console.log(votes[i][0].title);
+      votesDiv.appendChild(div);
+    }
+
+    let buttomRight = this.createElement("button", votesDiv, "button", "id", "carrouselRightButtom")
+    let buttomLeft = this.createElement("button", votesDiv, "button", "id", "corrouselLeftButtom")
+    carrouselRightButtom(buttomRight);
+    carrouselLeftButtom(buttomLeft);
+    return votesDiv;
   }
 
   static createElement(tagName, father, content = null, attribute = null, attributeValue = null) {

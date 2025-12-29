@@ -2,6 +2,7 @@ body {
   background-color: #07102B;
   color: white;
   z-index: 1;
+  overflow-x: hidden;
 }
 
 #itemDetail {
@@ -43,6 +44,23 @@ img {
   height: 500px;
   width: 340px;
   margin: 25px;
+}
+
+/* #votesDiv { */
+/*   display: flex; */
+/* } */
+#reportView>div {
+  display: flex;
+}
+
+#carrouselButtom {
+  position: relative;
+  top: 10;
+}
+
+#reportView img {
+  height: 300px;
+  width: 200px;
 }
 
 div {

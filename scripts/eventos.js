@@ -45,14 +45,37 @@ function reportButtonEvent(button) {
     if (isclick) {
       container.style.display = "none";
       // container.style.position = "static"
-      controller.reportController(isclick);
+      controller.hola();
+      // view.report(isclick)
       isclick = false;
     } else {
       container.style.display = "grid";
-      for (let i = 0; i < pageNumber + 2; i++) {
-        view.reload("reportView");
-      }
+      // for (let i = 0; i < pageNumber + 2; i++) {
+      //   view.reload("reportView");
+      // }
       isclick = true;
     }
+  })
+}
+
+var translateFactor = 1;
+var translate = 50;
+console.log(translateFactor)
+function carrouselRightButtom(button) {
+  button.addEventListener("click", (event) => {
+    translateFactor++;
+    // button.style.transform = `translateX( ${-translate} %)`;
+    document.querySelectorAll("[id='carrouselElement']").forEach((item) => {
+      item.style.transform = `translateX(${-translate * translateFactor}%)`
+    })
+  })
+}
+
+function carrouselLeftButtom(button) {
+  button.addEventListener("click", (event) => {
+    translateFactor--;
+    document.querySelectorAll("[id='carrouselElement']").forEach((item) => {
+      item.style.transform = `translateX(${-translate * translateFactor}%)`
+    })
   })
 }

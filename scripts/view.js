@@ -102,24 +102,37 @@ class view {
 
   static report(votes, offices, rankings) {
     let reportView = document.createElement("div");
+    let votesDiv = document.createElement("div");
+    let officesDiv = document.createElement("div");
+    let rankingsDiv = document.createElement("div");
     reportView.setAttribute("id", "reportView");
-    this.createElement("h1", reportView, "Más Votadas");
-    reportView.appendChild(this.reportVotes(votes));
-    this.createElement("h1", reportView, "Más Taquilleras");
-    reportView.appendChild(this.reportVotes(offices));
-    this.createElement("h1", reportView, "Mejor Valoradas");
-    reportView.appendChild(this.reportVotes(rankings));
+
+    this.createElement("h1", votesDiv, "Más Votadas");
+    votesDiv.appendChild(this.reportVotes(votes, "votes", votesDiv));
+    reportView.appendChild(votesDiv);
+
+    this.createElement("h1", officesDiv, "Más Taquilleras");
+    //Quitar este if cuando cambie como procesa los datos de las peliculas (las peliculas más algo viene de hacer la media de los resultados obtenidos y no mediante datos aleatorios harcodeados)
+    if (offices.length != 0) {
+      officesDiv.appendChild((this.reportVotes(offices, "offices", officesDiv)));
+      reportView.appendChild(officesDiv);
+    }
+
+    this.createElement("h1", rankingsDiv, "Mejor Valoradas");
+    rankingsDiv.appendChild(this.reportVotes(rankings, "rankings", rankingsDiv));
+    reportView.appendChild(rankingsDiv);
     document.body.appendChild(reportView);
     // console.log(votesDiv.getBoundingClientRect())
     console.log(document.getElementById("carrouselElement").getBoundingClientRect())
   }
 
-  static reportVotes(votes) {
+  static reportVotes(votes, id, buttomFather) {
     console.log("reportvotes: ", votes)
     let votesDiv = document.createElement("div");
-    votesDiv.setAttribute("id", "movieCarrousel")
+    votesDiv.setAttribute("id", `movieCarrousel${id}`);
+    votesDiv.setAttribute("class", `movieCarrousel`);
     for (let i = 0; i < votes.length; i++) {
-      let div = document.createElement("div", "carrouselElement");
+      let div = document.createElement("div", `movieCarrousel${id}`);
       div.setAttribute("id", "carrouselElement")
       this.createElement("img", div, null, "src", votes[i][0].img);
       this.createElement("p", div, votes[i][0].title);
@@ -127,10 +140,12 @@ class view {
       votesDiv.appendChild(div);
     }
 
-    let buttomRight = this.createElement("button", votesDiv, "button", "id", "carrouselRightButtom")
-    let buttomLeft = this.createElement("button", votesDiv, "button", "id", "corrouselLeftButtom")
-    carrouselRightButtom(buttomRight);
-    carrouselLeftButtom(buttomLeft);
+    if (votes.length > 8) {
+      let buttomRight = this.createElement("button", buttomFather, "button", "id", "carrouselRightButtom");
+      let buttomLeft = this.createElement("button", buttomFather, "button", "id", "corrouselLeftButtom");
+      carrouselRightButtom(buttomLeft, `movieCarrousel${id}`);
+      carrouselLeftButtom(buttomRight, `movieCarrousel${id}`);
+    }
     return votesDiv;
   }
 

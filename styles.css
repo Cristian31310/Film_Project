@@ -49,18 +49,35 @@ img {
 /* #votesDiv { */
 /*   display: flex; */
 /* } */
-#reportView>div {
+.movieCarrousel {
   display: flex;
 }
 
 #carrouselButtom {
   position: relative;
   top: 10;
+  left: 10;
 }
 
 #reportView img {
   height: 300px;
   width: 200px;
+}
+
+#reportView>div>button {
+  position: absolute;
+  left: 1vw;
+  color: red;
+  height: 20%;
+  padding: 20px;
+  margin-top: 80px;
+  z-index: 1;
+}
+
+#reportView>div>button+button {
+  position: absolute;
+  left: 94.5vw;
+  color: blue;
 }
 
 div {

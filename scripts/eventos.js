@@ -59,22 +59,26 @@ function reportButtonEvent(button) {
 }
 
 var translateFactor = 1;
-var translate = 50;
+var translate = 20;
 console.log(translateFactor)
-function carrouselRightButtom(button) {
+function carrouselRightButtom(button, id) {
   button.addEventListener("click", (event) => {
     translateFactor++;
     // button.style.transform = `translateX( ${-translate} %)`;
-    document.querySelectorAll("[id='carrouselElement']").forEach((item) => {
+    document.querySelectorAll(`[id='${id}']`).forEach((item) => {
       item.style.transform = `translateX(${-translate * translateFactor}%)`
     })
   })
 }
 
-function carrouselLeftButtom(button) {
+function carrouselLeftButtom(button, id) {
   button.addEventListener("click", (event) => {
     translateFactor--;
-    document.querySelectorAll("[id='carrouselElement']").forEach((item) => {
+    if (translateFactor === 0) {
+      translateFactor = -1;
+    }
+    console.log(translateFactor);
+    document.querySelectorAll(`[id='${id}']`).forEach((item) => {
       item.style.transform = `translateX(${-translate * translateFactor}%)`
     })
   })

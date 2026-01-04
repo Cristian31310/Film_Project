@@ -37,7 +37,11 @@ class controller {
     }
   }
 
+  static async getReportInf(page) {
+
+  }
   static async hola() {
+    // page == null ? page = 1;
     // Repiter tantas veces como peticiones se hace en la vista principal
     defaultApiURL = "https://www.omdbapi.com/?apikey=496cdeca&s=" + userSearch + page + pageNumber + "&type=" + type;
     const response = await fetch(defaultApiURL);
@@ -64,9 +68,9 @@ class controller {
       // movieOffices.set(movies[i].imdbID, parseInt(office.slice(1).split(",").join("")));
       // movieRatings.set(movies[i].imdbID, await this.movieRating(movies[i].imdbID));
     }
-    console.log(movieVotes);
-    console.log(movieOffices);
-    console.log(movieRatings);
+    // console.log(movieVotes);
+    // console.log(movieOffices);
+    // console.log(movieRatings);
 
     this.orderAndTruncateArray(movieVotes, 4000);
     this.orderAndTruncateArray(movieOffices, 10000000);
@@ -78,7 +82,7 @@ class controller {
   }
   static async orderAndTruncateArray(array, truncValue) {
     let order = array.filter((item) => item[1] >= truncValue);
-    console.log("order: ", order);
+    // console.log("order: ", order);
     return order;
   }
   static async movieRating(id) {

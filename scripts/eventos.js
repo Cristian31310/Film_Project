@@ -63,11 +63,9 @@ var translate = 20;
 console.log(translateFactor)
 function carrouselRightButtom(button, id) {
   button.addEventListener("click", (event) => {
+    loadMoviesCarrousel(id);
     translateFactor++;
-    // button.style.transform = `translateX( ${-translate} %)`;
-    document.querySelectorAll(`[id='${id}']`).forEach((item) => {
-      item.style.transform = `translateX(${-translate * translateFactor}%)`
-    })
+    translateCarrouselElements(id);
   })
 }
 
@@ -77,9 +75,42 @@ function carrouselLeftButtom(button, id) {
     if (translateFactor === 0) {
       translateFactor = -1;
     }
-    console.log(translateFactor);
-    document.querySelectorAll(`[id='${id}']`).forEach((item) => {
-      item.style.transform = `translateX(${-translate * translateFactor}%)`
-    })
+    translateCarrouselElements(id)
   })
+}
+
+function translateCarrouselElements(id) {
+  document.querySelectorAll(`[id='${id}']`).forEach((item) => {
+    item.style.transform = `translateX(${-translate * translateFactor}%)`
+  })
+}
+
+let bool = true;
+async function loadMoviesCarrousel(id) {
+  if (id == "movieCarrouseloffices") {
+    if (bool) {
+      bool = false;
+      let votes = await Report.getReportOffices();
+      ViewReport.addMoreMoviesCarrosel(votes, id);
+      bool = true;
+    }
+    console.log("El id del div del boton es: ", id);
+  } else if (id == "movieCarrouselvotes") {
+
+    if (bool) {
+      bool = false;
+      let votes = await Report.getReportVotes();
+      ViewReport.addMoreMoviesCarrosel(votes, id);
+      bool = true;
+    }
+  } else if (id == "movieCarrouselrankings") {
+
+    if (bool) {
+      bool = false;
+      let votes = await Report.getReportRatings();
+      ViewReport.addMoreMoviesCarrosel(votes, id);
+      bool = true;
+    }
+    console.log("El id del div del boton es: ", id);
+  }
 }

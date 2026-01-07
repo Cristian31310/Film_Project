@@ -100,55 +100,6 @@ class view {
     document.body.appendChild(detailView);
   }
 
-  static report(votes, offices, rankings) {
-    let reportView = document.createElement("div");
-    let votesDiv = document.createElement("div");
-    let officesDiv = document.createElement("div");
-    let rankingsDiv = document.createElement("div");
-    reportView.setAttribute("id", "reportView");
-
-    this.createElement("h1", votesDiv, "Más Votadas");
-    votesDiv.appendChild(this.reportVotes(votes, "votes", votesDiv));
-    reportView.appendChild(votesDiv);
-
-    this.createElement("h1", officesDiv, "Más Taquilleras");
-    //Quitar este if cuando cambie como procesa los datos de las peliculas (las peliculas más algo viene de hacer la media de los resultados obtenidos y no mediante datos aleatorios harcodeados)
-    if (offices.length != 0) {
-      officesDiv.appendChild((this.reportVotes(offices, "offices", officesDiv)));
-      reportView.appendChild(officesDiv);
-    }
-
-    this.createElement("h1", rankingsDiv, "Mejor Valoradas");
-    rankingsDiv.appendChild(this.reportVotes(rankings, "rankings", rankingsDiv));
-    reportView.appendChild(rankingsDiv);
-    document.body.appendChild(reportView);
-    // console.log(votesDiv.getBoundingClientRect())
-    console.log(document.getElementById("carrouselElement").getBoundingClientRect())
-  }
-
-  static reportVotes(votes, id, buttomFather) {
-    console.log("reportvotes: ", votes)
-    let votesDiv = document.createElement("div");
-    votesDiv.setAttribute("id", `movieCarrousel${id}`);
-    votesDiv.setAttribute("class", `movieCarrousel`);
-    for (let i = 0; i < votes.length; i++) {
-      let div = document.createElement("div", `movieCarrousel${id}`);
-      div.setAttribute("id", "carrouselElement")
-      this.createElement("img", div, null, "src", votes[i][0].img);
-      this.createElement("p", div, votes[i][0].title);
-      console.log(votes[i][0].title);
-      votesDiv.appendChild(div);
-    }
-
-    if (votes.length > 8) {
-      let buttomRight = this.createElement("button", buttomFather, "button", "id", "carrouselRightButtom");
-      let buttomLeft = this.createElement("button", buttomFather, "button", "id", "corrouselLeftButtom");
-      carrouselRightButtom(buttomLeft, `movieCarrousel${id}`);
-      carrouselLeftButtom(buttomRight, `movieCarrousel${id}`);
-    }
-    return votesDiv;
-  }
-
   static createElement(tagName, father, content = null, attribute = null, attributeValue = null) {
     let element = document.createElement(tagName);
     father.appendChild(element);
@@ -160,4 +111,5 @@ class view {
 
     return element;
   }
-} 
+}
+

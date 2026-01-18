@@ -5,9 +5,10 @@ var petecionEnCurso;
 
 var page = "&page=";
 var userSearch = "star";
+var apikey = "496cdeca"
 var apiURL = "https://www.omdbapi.com/?apikey=ca3a985&s=";
 var type = "movie"
-var defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&s=" + userSearch + page + pageNumber + "&type=" + type;
+var defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&s=` + userSearch + page + pageNumber + "&type=" + type;
 
 class controller {
 
@@ -17,6 +18,7 @@ class controller {
 
   static setUserSearch(search) {
     userSearch = search;
+    // this.movieSearch( )
   }
 
   static setPageNumber(number) {
@@ -24,7 +26,7 @@ class controller {
   }
 
   static movieSearch(container) {
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&s=" + userSearch + page + pageNumber + "&type=" + type;
+    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&s=` + userSearch + page + pageNumber + "&type=" + type;
     if (!petecionEnCurso) {
       petecionEnCurso = true;
       fetch(defaultApiURL)
@@ -39,7 +41,7 @@ class controller {
 
   static async getReportInf() {
     // Repiter tantas veces como peticiones se hace en la vista principal
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&s=" + userSearch + page + pageNumber + "&type=" + type;
+    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&s=` + userSearch + page + pageNumber + "&type=" + type;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     const movies = data.Search;
@@ -109,21 +111,21 @@ class controller {
     return order;
   }
   static async movieRating(id) {
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&i=" + id;
+    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     return data.imdbRating;
   }
 
   static async movieVotes(id) {
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&i=" + id;
+    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     return data.imdbVotes;
   }
 
   static async movieOffice(id) {
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&i=" + id;
+    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     return data.BoxOffice;
@@ -149,7 +151,7 @@ class controller {
   // }
 
   static imdbData(id) {
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&i=" + id;
+    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     if (!petecionEnCurso) {
       petecionEnCurso = true;
       fetch(defaultApiURL)

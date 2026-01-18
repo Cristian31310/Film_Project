@@ -83,3 +83,36 @@ img {
 div {
   text-align: center;
 }
+
+.loadingGif {
+  position: relative;
+  left: 30%;
+  top: 30%;
+}
+
+.star {
+  font-size: 25px;
+  color: yellow;
+  background-color: transparent;
+  border: none;
+}
+
+#divFavViewCarrousel {
+  display: flex;
+}
+
+#divFavView>button {
+  position: absolute;
+  left: 1vw;
+  color: red;
+  height: 35%;
+  padding: 25px;
+  margin-top: 9%;
+  z-index: 1;
+}
+
+#divFavView>button+button {
+  position: absolute;
+  left: 94.5vw;
+  color: blue;
+}

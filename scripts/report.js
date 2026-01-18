@@ -1,13 +1,14 @@
 let pageVotes = 1;
 let pageOffice = 1;
 let pageRanking = 1;
-
+var apikey = "496cdeca"
+// var defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&s=";
 class Report {
 
   static async getReportInf(numPage) {
     // Repiter tantas veces como peticiones se hace en la vista principal
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&s=" + userSearch + page + numPage + "&type=" + type;
-    const response = await fetch(defaultApiURL);
+    var urlInfo = `https://www.omdbapi.com/?apikey=${apikey}&s=` + userSearch + page + numPage + "&type=" + type;
+    const response = await fetch(urlInfo);
     const data = await response.json();
     const movies = data.Search;
 
@@ -72,21 +73,21 @@ class Report {
     return order;
   }
   static async movieRating(id) {
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&i=" + id;
+    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     return data.imdbRating;
   }
 
   static async movieVotes(id) {
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&i=" + id;
+    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     return data.imdbVotes;
   }
 
   static async movieOffice(id) {
-    defaultApiURL = "https://www.omdbapi.com/?apikey=ca3a985&i=" + id;
+    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     return data.BoxOffice;

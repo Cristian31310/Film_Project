@@ -1,5 +1,10 @@
-class view {
+var favMovies = [];
+if (localStorage.getItem("movie")) {
+  favMovies = JSON.parse(localStorage.getItem("movie"));
+}
+console.log(favMovies);
 
+class view {
   img = document.getElementsByTagName("img");
   caratula;
   title;
@@ -66,7 +71,41 @@ class view {
       for (let i = 0; i < dataFilms.Search.length; i++) {
         this.createElements();
         this.insertJsonContent(dataFilms, i);
+        let fav = document.createElement("button");
+        let isClick = true;
+        fav.textContent = "☆";
+        for (let j = 0; j < favMovies.length; j++) {
+          if (dataFilms.Search[i].imdbID == favMovies[j]) {
+            console.log("jruceroc");
+            fav.textContent = "★";
+            isClick = false;
+            break;
+          }
+        }
+
+        favButton(fav, isClick);
+        // fav.textContent = "☆";
+        // this.isFav(dataFilms, fav);
+        fav.setAttribute("class", "star");
+        fav.setAttribute("id", "star");
+        this.divP.appendChild(fav);
         this.apendJsonElement(container);
+      }
+    }
+  }
+
+  static isFav(dataFilms, element) {
+    console.log("--------------------");
+    console.log("IsFav");
+    console.log(dataFilms.Search);
+    console.log(favMovies);
+
+    for (let i = 0; i < dataFilms.Search.length; i++) {
+      if (dataFilms.Search[i].imdbID == "tt0076759") {
+        console.log("jruceroc");
+        element.textContent = "★";
+      } else if (dataFilms.Search[i].imdbID != "tt0076759") {
+        element.textContent = "☆";
       }
     }
   }
@@ -83,6 +122,7 @@ class view {
         this.createElement("h1", movieData, data[numDataMovie[i]]);
 
       } else if (i == numDataMovie.length - 1) {
+
         for (let j = 0; j < data.Ratings.length; j++) {
           this.createElement("p", movieData, data.Ratings[j].Source + ": " + data.Ratings[j].Value);
         }
@@ -112,4 +152,3 @@ class view {
     return element;
   }
 }
-

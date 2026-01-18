@@ -5,6 +5,7 @@ const buttonSearchSerie = document.getElementById("buttonSerie");
 var inputMovie = document.getElementById("movieInput");
 var inputSerie = document.getElementById("serieInput");
 var reportButton = document.getElementById("buttonReport");
+var favViewButton = document.getElementById("favMoviesButton")
 var petecionEnCurso;
 
 var container = document.createElement("div");
@@ -14,6 +15,7 @@ window.onload = () => {
   searchButtom(buttonSearchMovie, inputMovie, "movie");
   searchButtom(buttonSearchSerie, inputSerie, "series");
   reportButtonEvent(reportButton);
+  favMoviesButton(favViewButton);
   document.body.appendChild(container);
 }
 

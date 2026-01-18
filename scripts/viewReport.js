@@ -1,6 +1,7 @@
 class ViewReport {
 
   static report(votes, offices, rankings) {
+    this.deleteElement("loadingGif");
     let reportView = document.createElement("div");
     let votesDiv = document.createElement("div");
     let officesDiv = document.createElement("div");
@@ -30,6 +31,15 @@ class ViewReport {
     // console.log(document.getElementById("carrouselElement").getBoundingClientRect())
   }
 
+  static deleteElement(element) {
+    let report = document.getElementById(element);
+    report.remove();
+  }
+
+  static loadingPreview(div) {
+    let loadingGif = view.createElement("img", div, null, "src", "img/loading-image.gif");
+    loadingGif.setAttribute("id", "loadingGif");
+  }
   static reportVotes(votes, id, buttomFather) {
     let div = document.createElement("div");
     div.setAttribute("id", `movieCarrousel${id}`);
@@ -50,6 +60,7 @@ class ViewReport {
   static createCarrousel(votes, carrousel) {
 
     for (let i = 0; i < votes.length; i++) {
+      console.log("FavMoviesArrayCreateCarrousel: " + votes);
       let div = document.createElement("div");
       div.setAttribute("id", "carrouselElement")
       let img = view.createElement("img", div, null, "src", votes[i][0].img);
@@ -63,11 +74,13 @@ class ViewReport {
 
   static createMoveCorruselMoviesButtoms(votes, id, buttomFather) {
 
-    if (votes.length > 8) {
+    if (votes.length > 6) {
       let buttomRight = view.createElement("button", buttomFather, "button");
       let buttomLeft = view.createElement("button", buttomFather, "button");
       carrouselRightButtom(buttomLeft, `movieCarrousel${id}`);
       carrouselLeftButtom(buttomRight, `movieCarrousel${id}`);
+    } else {
+      loadMoviesCarrousel(id);
     }
   }
 }

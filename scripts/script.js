@@ -1,4 +1,6 @@
-
+import { controller } from "./controller.js"
+import { searchButtom, reportButtonEvent, favMoviesButton } from "./eventos.js";
+export { container };
 const buttonSearchMovie = document.getElementById("buttonMovie");
 const buttonSearchSerie = document.getElementById("buttonSerie");
 

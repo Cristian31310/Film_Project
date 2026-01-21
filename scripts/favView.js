@@ -1,41 +1,42 @@
+export { FavView }
+import { view } from "./view.js";
+import { carrouselLeftButtom, carrouselRightButtom } from "./eventos.js";
 class FavView {
-  static createView(movieData) {
+  div;
+  divCarrousel;
+  static createView() {
     // console.log(movieData.Poster);
-    let div = document.createElement("div");
-    let divCarrousel = document.createElement("div");
-    div.setAttribute("id", "divFavView");
-    view.createElement("h1", div, "Peliculas Favoritas");
-    divCarrousel.setAttribute("id", "divFavViewCarrousel");
-    this.createCarrousel(movieData, divCarrousel);
-    this.createMoveCorruselMoviesButtoms(movieData, "favButtomCarrousel", div);
-    div.appendChild(divCarrousel);
-    document.body.appendChild(div);
+    this.div = document.createElement("div");
+    this.divCarrousel = document.createElement("div");
+    this.div.setAttribute("id", "divFavView");
+    view.createElement("h1", this.div, "Peliculas Favoritas");
+    this.divCarrousel.setAttribute("id", "divFavViewCarrousel");
+    // this.createCarrousel(movieData, divCarrousel);
+    this.createMoveCorruselMoviesButtoms("divFavViewCarrousel", this.div);
+    this.div.appendChild(this.divCarrousel);
+    document.body.appendChild(this.div);
+    return this.divCarrousel;
   }
-
 
   static createCarrousel(movieData, container) {
-    for (let i = 0; i < movieData.length; i++) {
-      console.log("FavMoviesArrayCreateCarrousel: " + movieData);
-      let div = document.createElement("div");
-      div.setAttribute("id", "carrouselElement")
+    // for (let i = 0; i < movieData.length; i++) {
+    console.log("FavMoviesArrayCreateCarrousel: " + movieData);
+    let div = document.createElement("div");
+    div.setAttribute("id", "carrouselElement")
 
-      let img = view.createElement("img", div, null, "src", movieData[i].Poster);
-      img.onerror = (e) => {
-        e.target.setAttribute("src", "https://w.wallhaven.cc/full/3q/wallhaven-3qqlld.png");
-      }
-      view.createElement("p", div, movieData[i].Title);
-      container.appendChild(div);
+    let img = view.createElement("img", div, null, "src", movieData.Poster);
+    img.onerror = (e) => {
+      e.target.setAttribute("src", "https://w.wallhaven.cc/full/3q/wallhaven-3qqlld.png");
     }
-  }
-  static createMoveCorruselMoviesButtoms(votes, id, buttomFather) {
-
-    if (votes.length > 4) {
-      let buttomRight = view.createElement("button", buttomFather, "button");
-      let buttomLeft = view.createElement("button", buttomFather, "button");
-      carrouselRightButtom(buttomLeft, `divFavViewCarrousel`);
-      carrouselLeftButtom(buttomRight, `divFavViewCarrousel`);
-    }// else {
-    //   loadMoviesCarrousel(id);
+    view.createElement("p", div, movieData.Title);
+    container.appendChild(div);
     // }
+  }
+  static createMoveCorruselMoviesButtoms(id, buttomFather) {
+
+    let buttomRight = view.createElement("button", buttomFather, "button");
+    let buttomLeft = view.createElement("button", buttomFather, "button");
+    carrouselRightButtom(buttomLeft, id);
+    carrouselLeftButtom(buttomRight, id);
   }
 }

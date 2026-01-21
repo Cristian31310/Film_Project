@@ -6,28 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pelis Chulas</title>
   <link rel="stylesheet" href="./styles.css">
-  <script src="scripts/script.js" async></script>
+  <script src="scripts/script.js" async type="module"></script>
 </head>
 
 <body>
-  <label for="movieInput">Buscar Peliculas</label>
-  <input type="text" id="movieInput" name="movieInput">
-  <button type="submit" value="Search" id="buttonMovie"> Search </button>
+  <header>
+    <label for="movieInput">Buscar Peliculas</label>
+    <input type="text" id="movieInput" name="movieInput">
+    <button type="submit" value="Search" id="buttonMovie"> Search </button>
 
-  <label for="serieInput">Buscar Series</label>
-  <input type="text" id="serieInput" name="serieInput">
-  <button type="submit" value="Search" id="buttonSerie"> Search </button>
-  <button type="submit" value="report" id="buttonReport"> Report </button>
-  <button id="favMoviesButton"> Favoritas </button>
+    <label for="serieInput">Buscar Series</label>
+    <input type="text" id="serieInput" name="serieInput">
+    <button type="submit" value="Search" id="buttonSerie"> Search </button>
+    <button type="submit" value="report" id="buttonReport"> Report </button>
+    <button id="favMoviesButton"> Favoritas </button>
+  </header>
 
 </body>
-
-<script src="scripts/favController.js"></script>
-<script src="scripts/favView.js"></script>
-<script src="scripts/report.js"></script>
-<script src="scripts/viewReport.js"></script>
-<script src="scripts/controller.js"></script>
-<script src="scripts/view.js"></script>
-<script src="scripts/eventos.js"></script>
 
 </html>

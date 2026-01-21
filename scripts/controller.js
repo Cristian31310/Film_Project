@@ -1,4 +1,7 @@
-
+export { controller, apikey, userSearch, page, type };
+import { view } from "./view.js";
+import { ViewReport } from "./viewReport.js";
+import { Report } from "./report.js";
 var pageNumber = 1;
 
 var petecionEnCurso;
@@ -97,10 +100,19 @@ class controller {
     }
     return this.orderAndTruncateArray(movieRatings, 7);
   }
-  static async hola() {
+  static async hola(event) {
+    event.disabled = true;
+    document.getElementById("favMoviesButton").disabled = true;
+    document.getElementById("buttonSerie").disabled = true;
+    document.getElementById("buttonMovie").disabled = true;
+    console.log("Empieza")
     ViewReport.report(await Report.getReportVotes(),
       await Report.getReportOffices(),
       await Report.getReportRatings())
+    document.getElementById("favMoviesButton").disabled = false;
+    document.getElementById("buttonSerie").disabled = false;
+    document.getElementById("buttonMovie").disabled = false;
+    event.disabled = false;
     // view.report(await Report.getReportVotes(),
     //   await Report.getReportOffices(),
     //   await Report.getReportRatings())

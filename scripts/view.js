@@ -1,3 +1,5 @@
+export { view };
+import { imageClick, favButton, closeDetail } from "./eventos.js";
 var favMovies = [];
 if (localStorage.getItem("movie")) {
   favMovies = JSON.parse(localStorage.getItem("movie"));

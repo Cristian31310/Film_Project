@@ -1,3 +1,5 @@
+export { Report };
+import { userSearch, page, type } from "./controller.js";
 let pageVotes = 1;
 let pageOffice = 1;
 let pageRanking = 1;
@@ -73,21 +75,21 @@ class Report {
     return order;
   }
   static async movieRating(id) {
-    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
+    let defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     return data.imdbRating;
   }
 
   static async movieVotes(id) {
-    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
+    let defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     return data.imdbVotes;
   }
 
   static async movieOffice(id) {
-    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
+    let defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
     const response = await fetch(defaultApiURL);
     const data = await response.json();
     return data.BoxOffice;

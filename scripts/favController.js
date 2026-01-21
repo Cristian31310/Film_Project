@@ -1,25 +1,26 @@
-// export { FavController };
+export { FavController };
+import { FavView } from "./favView.js";
+import { apikey } from "./controller.js";
 class FavController {
   static obtainLocalStorageData() {
-    // let storage = localStorage.getItem("movie");
     return JSON.parse(localStorage.getItem("movie"));
   }
 
-  static async obtainMovieData(id) {
-    defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
-    const response = await fetch(defaultApiURL);
-    const data = await response.json();
-    return data;
+  static async obtainMovieData(id, container) {
+    let defaultApiURL = `https://www.omdbapi.com/?apikey=${apikey}&i=` + id;
+    fetch(defaultApiURL)
+      .then((response) => response.json())
+      .then((movie) => {
+        FavView.createCarrousel(movie, container)
+      })
   }
 
   static async algo() {
-    let movies = [];
+    let div = FavView.createView();
+
     for (let i = 0; i < this.obtainLocalStorageData().length; i++) {
-      movies.push(await this.obtainMovieData(this.obtainLocalStorageData()[i]));
+      this.obtainMovieData(this.obtainLocalStorageData()[i], div);
     }
 
-    console.log(movies);
-    FavView.createView(movies);
-    console.log(movies);
   }
 }

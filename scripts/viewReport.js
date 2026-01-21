@@ -1,3 +1,6 @@
+export { ViewReport };
+import { view } from "./view.js";
+import { carrouselLeftButtom, carrouselRightButtom, loadMoviesCarrousel } from "./eventos.js";
 class ViewReport {
 
   static report(votes, offices, rankings) {
@@ -33,7 +36,9 @@ class ViewReport {
 
   static deleteElement(element) {
     let report = document.getElementById(element);
-    report.remove();
+    if (report) {
+      report.remove();
+    }
   }
 
   static loadingPreview(div) {
